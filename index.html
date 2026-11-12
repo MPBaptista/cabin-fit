@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="color-scheme" content="dark">
+        <meta name="theme-color" content="#0b0d12">
+        <meta name="description" content="Cabin Fit tells you which airlines accept your cabin bag. Enter its height, width and depth in centimetres or inches.">
+        <meta property="og:title" content="Cabin Fit">
+        <meta property="og:description" content="Find out which airlines accept your cabin bag.">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+        <link rel="stylesheet" href="style.css">
+        <title>Cabin Fit · Check your cabin bag size</title>
+    </head>
+    <body>
+        <main class="wrapper">
+            <header class="intro">
+                <img class="logo" src="resources/icons/shopping-bag-check.svg" width="72" height="72" alt="">
+                <h1>Cabin Fit</h1>
+                <p class="tagline">Find out which airlines accept your cabin bag.</p>
+            </header>
+
+            <section class="card" aria-labelledby="bag-title">
+                <div class="card-head">
+                    <h2 id="bag-title">Your bag</h2>
+                    <div class="segmented" role="group" aria-label="Unit of measure">
+                        <button type="button" data-unit="cm" aria-pressed="true">cm</button>
+                        <button type="button" data-unit="in" aria-pressed="false">in</button>
+                    </div>
+                </div>
+
+                <div class="dims">
+                    <label class="field">
+                        <span class="field-label">Height</span>
+                        <span class="input-wrap">
+                            <input id="height" type="number" inputmode="decimal" min="0" step="0.1" placeholder="0">
+                            <span class="suffix" data-suffix>cm</span>
+                        </span>
+                    </label>
+                    <label class="field">
+                        <span class="field-label">Width</span>
+                        <span class="input-wrap">
+                            <input id="width" type="number" inputmode="decimal" min="0" step="0.1" placeholder="0">
+                            <span class="suffix" data-suffix>cm</span>
+                        </span>
+                    </label>
+                    <label class="field">
+                        <span class="field-label">Depth</span>
+                        <span class="input-wrap">
+                            <input id="depth" type="number" inputmode="decimal" min="0" step="0.1" placeholder="0">
+                            <span class="suffix" data-suffix>cm</span>
+                        </span>
+                    </label>
+                </div>
+
+                <p id="status" class="status" role="alert" hidden></p>
+            </section>
+
+            <section class="card results" id="results" aria-labelledby="summary" hidden>
+                <h2 id="summary" aria-live="polite">Checking…</h2>
+
+                <label class="search">
+                    <svg class="search-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"/><path d="M20 20l-3.5-3.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                    <span class="sr-only">Search airlines</span>
+                    <input id="search" type="search" placeholder="Search airlines" autocomplete="off" spellcheck="false">
+                </label>
+
+                <p id="search-note" class="note" hidden></p>
+                <ul id="airline-list" class="airline-list"></ul>
+
+                <button type="button" id="open-all" class="ghost-btn">Show all airlines</button>
+            </section>
+        </main>
+
+        <footer class="site-footer">
+            <p class="disclaimer">Limits are based on published airline allowances and can change. Check with your airline before you fly.</p>
+            <nav class="footer-links" aria-label="Footer">
+                <a href="https://github.com/MPBaptista/cabin-fit/blob/main/LICENSE" target="_blank" rel="noopener">MIT License</a>
+                <span class="dot" aria-hidden="true">·</span>
+                <a href="https://github.com/MPBaptista" target="_blank" rel="noopener">GitHub profile</a>
+            </nav>
+        </footer>
+
+        <dialog id="all-airlines" class="sheet" aria-labelledby="all-title">
+            <div class="sheet-head">
+                <h2 id="all-title">All airlines</h2>
+                <button type="button" class="icon-btn" data-close aria-label="Close">
+                    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                </button>
+            </div>
+            <label class="search">
+                <svg class="search-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"/><path d="M20 20l-3.5-3.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                <span class="sr-only">Search all airlines</span>
+                <input id="modal-search" type="search" placeholder="Search airlines" autocomplete="off" spellcheck="false">
+            </label>
+            <ul id="modal-list" class="airline-list"></ul>
+        </dialog>
+
+        <script src="airlines.js"></script>
+        <script src="script.js"></script>
+    </body>
+</html>
